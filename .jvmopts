@@ -1,0 +1,16 @@
+-XX:MaxInlineLevel=22
+
+-Xmx8G
+-Xms20M
+-XX:+UseG1GC
+-XX:ReservedCodeCacheSize=256m
+-XX:MaxMetaspaceSize=2048M
+-server
+-XX:+OmitStackTraceInFastThrow
+
+##-XX:+UnlockExperimentalVMOptions
+##-XX:+EnableJVMCI
+##-XX:+UseJVMCICompiler
+
+-Dquill.macro.log=false
+-Dfile.encoding=UTF-8

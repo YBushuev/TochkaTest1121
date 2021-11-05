@@ -1,2 +1,15 @@
 *.class
 *.log
+.idea
+.metals
+.code
+target
+.bloop
+**/target/
+**/logs/
+params.conf
+/.bsp/
+.vscode
+metals.sbt
+*h2.mv.db
+null
