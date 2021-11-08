@@ -59,12 +59,12 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
 
   property("should work for int gen values") {
 
-    val intGen: Gen[Int] = Gen.choose(1, 2)
+    val intGen: Gen[Int] = Gen.choose(1, 100)
 
     forAll(genTree[Int](intGen)) { x =>
       val a = x
       val b = TreeNode[Int](a.value, a.left, a.right)
-      val c = TreeNode[Int](10, a.left, a.right)
+      val c = TreeNode[Int](a.value + 1, a.left, a.right)
 
       assertEquals(TreeNode.isSameTreeF(a, b), true)
       assertEquals(TreeNode.isSameTreeF(a, c), false)
