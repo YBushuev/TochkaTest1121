@@ -25,9 +25,9 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
     val a: TreeNode[Any]       = TreeNode(1, Some(simpleP), Some(simpleQ))
     val b: TreeNode[Any]       = TreeNode(null, Some(simpleP), Some(simpleQ))
 
-    assertEquals(simpleP, simpleQ)
-    assertNotEquals(simpleP, a)
-    assertNotEquals(b, a)
+    assertEquals(TreeNode.isSameTree(Some(simpleP), Some(simpleQ)), true)
+    assertEquals(TreeNode.isSameTreeF(simpleP, a), false)
+    assertEquals(TreeNode.isSameTreeF(b, a), false)
 
   }
 
@@ -37,9 +37,9 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
     val b                = TreeNode[Int](10, None, None)
     val c                = TreeNode[Int](2, None, None)
 
-    assertEquals(a, b)
-    assertEquals(a.equals(b), true)
-    assertNotEquals(a, c)
+    assertEquals(TreeNode.isSameTreeF(a, b), true)
+    assertEquals(a.equals(b), false)
+    assertEquals(TreeNode.isSameTreeF(b, c), false)
 
   }
 
@@ -52,8 +52,8 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
     val b = TreeNode[AnyRef](listA, None, None)
     val c = TreeNode[AnyRef](listB, None, None)
 
-    assertEquals(a, b)
-    assertNotEquals(a, c)
+    assertEquals(TreeNode.isSameTreeF(a, b), true)
+    assertNotEquals(TreeNode.isSameTreeF(a, c), true)
 
   }
 
@@ -66,8 +66,8 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
       val b = TreeNode[Int](a.value, a.left, a.right)
       val c = TreeNode[Int](10, a.left, a.right)
 
-      assertEquals(a, b)
-      assertNotEquals(a, c)
+      assertEquals(TreeNode.isSameTreeF(a, b), true)
+      assertEquals(TreeNode.isSameTreeF(a, c), false)
     }
 
   }
@@ -84,7 +84,7 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
     forAll(genTree[Map[Long, Long]](mapGen)) { x =>
       val b = TreeNode[Map[Long, Long]](x.value, x.left, x.right)
 
-      assertEquals(x, b)
+      assertEquals(TreeNode.isSameTreeF(x, b), true)
 
     }
 
@@ -100,8 +100,8 @@ class TreeNodeEqSpec extends ScalaCheckSuite {
       val b = TreeNode[Foo](x.value, x.left, x.right)
       val c = TreeNode[Foo](new Foo(1L), x.left, x.right)
 
-      assertEquals(x, b)
-      assertNotEquals(x, c)
+      assertEquals(TreeNode.isSameTreeF(x, b), true)
+      assertNotEquals(TreeNode.isSameTreeF(x, c), true)
 
     }
 
