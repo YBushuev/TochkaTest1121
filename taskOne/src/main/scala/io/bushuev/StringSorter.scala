@@ -12,4 +12,13 @@ object StringSorter {
       .map(_._2)
       .mkString("")
 
+  object ops {
+
+    implicit class StringOps(value: String) {
+
+      def sortByCharCount: String = StringSorter.sortByCharCount(value)
+
+    }
+  }
+
 }
